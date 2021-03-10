@@ -256,23 +256,13 @@ h1, h2, h3, p, ul {
 }
 
 .card__image {
-    display: none;
     max-width: 300px;
     margin: 0 70px 0 0;
 }
 
-.card__image.active {
-    display: block;
-}
-
 .card-details__title {
-    display: none;
     font-size: 36px;
     line-height: 43px;
-}
-
-.card-details__title.active {
-    display: block;
 }
 
 .card-details__wrap-btn:not(:last-child) {
@@ -315,7 +305,7 @@ h1, h2, h3, p, ul {
 }
 
 .card-details__price {
-    min-width: 100px;
+    min-width: 120px;
     font-weight: 700;
     font-size: 24px;
     margin-right: 60px;
