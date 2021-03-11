@@ -50,6 +50,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    const accordion = () => {
+        const characteristicsList = document.querySelector('.characteristics__list')
+        const characteristicsItem = document.querySelectorAll('.characteristics__item')
+        
+        const open = (button, dropDown) => {
+            closeAllDrops(button, dropDown)
+            dropDown.style.height = `${dropDown.scrollHeight}px`
+            button.classList.add('active')
+            dropDown.classList.add('active')
+        }
+
+        const close = (button, dropDown) => {
+            button.classList.remove('active')
+            dropDown.classList.remove('active')
+            dropDown.style.height = ''
+        }
+
+        const closeAllDrops = (button, dropDown) => {
+            characteristicsItem.forEach((elem) => {
+                if (elem.children[0] !== button && elem.children[1] !== dropDown) {
+                    close(elem.children[0], elem.children[1])
+                }
+            })
+        }
+
+        characteristicsList.addEventListener('click', (event) => {
+            const target = event.target
+            if (target.classList.contains('characteristics__title')) {
+                const parent = target.closest('.characteristics__item')
+                const description = parent.querySelector('.characteristics__description')
+                description.classList.contains('active') ? close(target, description) : open(target, description)
+            }
+        })
+    }
+
+    const modal = () => {
+        const cardDetailsButtonBuy = document.querySelector('.card-details__button_buy')
+        const modal = document.querySelector('.modal')
+
+        cardDetailsButtonBuy.addEventListener('click', () => {
+            modal.classList.add('open')
+        })
+
+        modal.addEventListener('click', (event) => {
+            const target = event.target
+            if (target.classList.contains('modal__close')){
+                modal.classList.remove('open')
+            }
+        })
+        
+    }
+
     tabs()
+    accordion()
+    modal()
 
 })
