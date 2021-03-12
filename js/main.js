@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    const getData = (url, cb) => {
+        const request = new XMLHttpRequest()
+        request.open('GET', url)
+        request.send()
+
+        request.addEventListener('readystatechange', () => {
+            if (request.readyState !== 4) 
+            return
+
+            if (request.status === 200) {
+                const response = JSON.parse(request.response)
+                cb(response)
+            } else {
+                console.error(new Error('Ошибка: ' + request.status))
+            }
+        })
+    }
+
     const tabs = () => {
 
         const cardDetailChange = document.querySelectorAll('.card-detail__change')
@@ -87,23 +105,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const modal = () => {
         const cardDetailsButtonBuy = document.querySelector('.card-details__button_buy')
+        const cardDetailsButtonDelivery = document.querySelector('.card-details__button_delivery')
         const modal = document.querySelector('.modal')
+        const cardDetailsTitle = document.querySelector('.card-details__title')
+        const modalTitle = document.querySelector('.modal__title')
+        const modalSubtitle = modal.querySelector('.modal__subtitle')
+        const modatTitleSubmit = modal.querySelector('.modal__title-submit')
 
-        cardDetailsButtonBuy.addEventListener('click', () => {
+        const openModal = (event) => {
+            const target = event.target
             modal.classList.add('open')
-        })
+            document.addEventListener('keydown', escapeHandler)
+            modalTitle.textContent = cardDetailsTitle.textContent
+            modatTitleSubmit.value = cardDetailsTitle.textContent
+            modalSubtitle.textContent = target.dataset.buttonBuy
+        }
+
+        const closeModal = () => {
+            modal.classList.remove('open')
+        }
+
+        const escapeHandler = (event) => {
+            if (event.code === 'Escape') {
+                closeModal()
+            }
+        }
 
         modal.addEventListener('click', (event) => {
             const target = event.target
-            if (target.classList.contains('modal__close')){
-                modal.classList.remove('open')
+            if (target.classList.contains('modal__close') || target === modal) {
+                closeModal()
             }
         })
-        
+
+        cardDetailsButtonBuy.addEventListener('click', openModal)
+        cardDetailsButtonDelivery.addEventListener('click', openModal)
+    }
+
+    const renderCrossSell = () => {
+        const crossSellList = document.querySelector('.cross-sell__list')
+
+        const createCrossSellItem = (good) => {
+            const liItem = document.createElement('li')
+            liItem.innerHTML = `
+                        <article class="cross-sell__item">
+							<img class="cross-sell__image" src="${good.photo}" alt="">
+							<h3 class="cross-sell__title">${good.name}</h3>
+							<p class="cross-sell__price">${good.price}₽</p>
+							<div class="button button_buy cross-sell__button">Купить</div>
+						</article>
+                    `
+                    return liItem
+        }
+
+        const createCrossSellList = (goods) => {
+            goods.forEach(item => {
+                crossSellList.append(createCrossSellItem(item))
+            })
+        }
+
+        getData('cross-sell-dbase/dbase.json', createCrossSellList)
     }
 
     tabs()
     accordion()
     modal()
+    renderCrossSell()
 
 })

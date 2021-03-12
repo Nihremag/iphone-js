@@ -69,8 +69,8 @@
 							<p class="card-details__price">
 								99990₽
 							</p>
-							<button class="button button_buy card-details__button_buy">Купить</button>
-							<button class="button card-details__button_delivery">Купить с доставкой</button>
+							<button class="button button_buy card-details__button_buy" data-button-buy = "Оплата">Купить</button>
+							<button class="button card-details__button_delivery" data-button-buy = "Доставка и оплата">Купить с доставкой</button>
 						</div>
 					</div>
 				</div>
@@ -376,41 +376,7 @@
 		<section class="cross-sell" id="cross-sell">
 			<div class="container">
 				<h2 class="cross-sell__main-title main-title">Дополняют этот товар</h2>
-				<ul class="cross-sell__list">
-					<li>
-						<article class="cross-sell__item">
-							<img class="cross-sell__image" src="cross-sell-dbase/img/50126638b.jpg" alt="">
-							<h3 class="cross-sell__title">Наушники Apple AirPods w/Charging Case</h3>
-							<p class="cross-sell__price">12990₽</p>
-							<div class="button button_buy cross-sell__button">Купить</div>
-						</article>
-					</li>
-					<li>
-						<article class="cross-sell__item">
-							<img class="cross-sell__image" src="cross-sell-dbase/img/30052979b.jpg" alt="">
-							<h3 class="cross-sell__title">Смарт-часы Apple Watch S6 44mm Space Gray Aluminum Case with Black Sport Band</h3>
-							<p class="cross-sell__price">39490₽</p>
-							<div class="button button_buy cross-sell__button">Купить</div>
-						</article>
-					</li>
-					<li>
-						<article class="cross-sell__item">
-							<img class="cross-sell__image" src="cross-sell-dbase/img/50144562b.jpg" alt="">
-							<h3 class="cross-sell__title">Чехол Apple iPhone 12 / 12 Pro Silicone MagSafe Black</h3>
-							<p class="cross-sell__price">4990₽</p>
-							<div class="button button_buy cross-sell__button">Купить</div>
-						</article>
-					</li>
-					<li>
-						<article class="cross-sell__item">
-							<img class="cross-sell__image" src="cross-sell-dbase/img/50143532b.jpg" alt="">
-							<h3 class="cross-sell__title">Защитное стекло InterStep iPhone 12/12 Pro</h3>
-							<p class="cross-sell__price">990₽</p>
-							<div class="button button_buy cross-sell__button">Купить</div>
-						</article>
-					</li>
-
-				</ul>
+				<ul class="cross-sell__list">	</ul>
 			</div>
 		</section>
 	</main>
@@ -420,6 +386,7 @@
 			<button class="modal__close">✘</button>
 			<h2 class="modal__subtitle">Доставка и оплата</h2>
 			<form action="">
+				<input type="text" class="modal__title-submit visually-hidden" name="good" value="Смартфон Apple iPhone 12 Pro 128GB Graphite" disabled>
 				<h3 class="modal__title">Смартфон Apple iPhone 12 Pro 128GB Graphite</h3>
 				<label class="modal__label">
 					<span class="modal__label-text">Куда доставить</span>
